@@ -1,11 +1,24 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useParams } from 'react-router';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonRouterOutlet, IonTitle, IonToolbar } from '@ionic/react';
+import { useState } from 'react';
+import { Route, useParams } from 'react-router';
 import ExploreContainer from '../components/ExploreContainer';
+import { History } from '../components/History';
+import { Home } from '../components/Home';
 import './Page.css';
 
 const Page: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState(null)
+
+  // const getUser = ()=>{
+  //   Axios({
+  //     method:"GET",
+  //     withCredentials: true,
+  //     url:"http://localhost:5000/users",
+  //   }).then((res)=>setUser(res.data))
+  // }
 
   return (
     <IonPage>
@@ -15,17 +28,65 @@ const Page: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>{name}</IonTitle>
+          {/* {show ? (
+        <div className="menusesion">
+          {user ? (
+            <nav>
+
+              <a
+                href="http://localhost:5000/users/logout"
+                exact="true"
+                activeclassname="active"
+              >
+                {user.name}
+              </a>
+
+              <NavLink exact="true" activeclassname="active" to="/account" className="account">
+                <FontAwesomeIcon icon={faHome} color="#4d4d4e" />
+              </NavLink>
+
+
+              <a
+                href="http://localhost:5000/users/logout"
+                exact="true"
+                activeclassname="active"
+                className="logout"
+              >
+                <FontAwesomeIcon icon={faBriefcase} color="#4d4d4e" />
+              </a>
+            </nav>
+          ) : (
+            <nav>
+              <NavLink
+                exact="true"
+                activeclassname="active"
+                className="login"
+                to="/login"
+              >
+                <FontAwesomeIcon icon={faFileAlt} color="#4d4d4e" />
+              </NavLink>
+            </nav>
+          )}
+        </div>
+      ) : (
+        <div className="opacity"></div>
+      )} */}
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name={name} />
-      </IonContent>
+      <IonRouterOutlet className='rutas'>
+            <Route path="/page/home" exact={true}>
+              <Home/> 
+            </Route>
+            <Route path='/page/history' exact={true}>
+              <History/>
+            </Route>
+            {/* <Route path='/page/mayor' exact={true}>
+              <Mayor/>
+            </Route> */}
+
+            
+          </IonRouterOutlet>
     </IonPage>
   );
 };
