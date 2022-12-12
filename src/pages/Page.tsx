@@ -1,9 +1,11 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonRouterOutlet, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
 import { Route, useParams } from 'react-router';
+import { Albergues } from '../components/Albergues';
 import ExploreContainer from '../components/ExploreContainer';
 import { History } from '../components/History';
 import { Home } from '../components/Home';
+import { Miembros } from '../components/Miembros';
 import './Page.css';
 
 const Page: React.FC = () => {
@@ -21,7 +23,7 @@ const Page: React.FC = () => {
   // }
 
   return (
-    <IonPage>
+    <IonPage className=''>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -74,16 +76,19 @@ const Page: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonRouterOutlet className='rutas'>
+      <IonRouterOutlet className='rutas overflow-auto '>
             <Route path="/page/home" exact={true}>
               <Home/> 
             </Route>
             <Route path='/page/history' exact={true}>
               <History/>
             </Route>
-            {/* <Route path='/page/mayor' exact={true}>
-              <Mayor/>
-            </Route> */}
+            <Route path='/page/members' exact={true}>
+              <Miembros/>
+            </Route>
+            <Route path='/page/albergues' exact={true}>
+              <Albergues/>
+            </Route>
 
             
           </IonRouterOutlet>
