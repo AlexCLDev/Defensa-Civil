@@ -1,0 +1,7 @@
+{
+  "name": "Defensa Civil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
